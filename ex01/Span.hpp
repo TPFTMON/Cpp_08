@@ -1,39 +1,58 @@
 #ifndef SPAN_HPP
 # define SPAN_HPP
 
+// some data about containers for me:
+
+// Sequence Containers:
+//  std::vector (dynamic array),
+//  std::list (doubly linked list),
+//  std::deque (double-ended queue).
+
+
+// Container Adaptors: std::stack, std::queue.
+//  These aren't new containers;
+//  they are wrappers around sequence containers that restrict how you access them (e.g., LIFO for stacks).
+
+
 // Includes:
 # include <iostream>
-
-
-// Messages:
-# define SPAN_MSG "\e[0;32mSpan\n\e[0m"
-
-# define DEF_CONSTR_MSG "\e[0;33mDefault Constructor\e[0m called of "
-# define COPY_CONSTR_MSG "\e[0;33mCopy Constructor\e[0m called of "
-# define COPY_ASSIGN_OP_MSG "\e[0;35mCopy assignment operator\e[0m called of "
-# define DESTR_MSG "\e[0;31mDestructor\e[0m called of "
+# include <vector>
+# include <exception>
 
 
 // Classes:
 class Span{
 
     private:
-        // ... some private stuff
+        std::vector<int> _vecArray;
+        size_t           _maxSize;
 
     public:
         // Orthodox Canonical Form:
-        Span();
+        Span(const int lenght = 0);
         Span(const Span &to_copy);
-        Span& operator=(const Span &assign);
+        Span& operator=(const Span assign);
         ~Span();
 
         // Other member functions:
-        // ... some members
+        void    addNumber(const int num);
+        int     shortestSpan();
+        int     longestSpan();
+        template <typename InputIterator>
+        void addNumbers(InputIterator begin, InputIterator end){
+            // 1. Calculating distance using std::distance(begin, end)
+            // 2. Checking if adding this distance exceeds _maxSize. If so, throw.
+            // 3. Using _vec.insert(_vec.end(), begin, end);
+        }
+        // void    addNumbers();
 
 };
 
 
-// Other:
-// ...
+// exceptions:
+class NotEnoughNumbersForSpan  : public std::exception{
+    public:
+        virtual const char* what() const throw();
+};
 
 #endif

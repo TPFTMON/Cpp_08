@@ -4,10 +4,11 @@
 // Includes:
 # include <iostream>
 # include <algorithm>    // for std::find
+# include <exception> // ?
 
 
 template <typename T>
-typename T::iterator easyfind(T& container, int to_find) {
+typename T::iterator easyfind(T& container, int to_find){
 
     typename T::iterator it = std::find(container.begin(), container.end(), to_find);
     if (it == container.end()){
