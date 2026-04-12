@@ -54,7 +54,7 @@ int     Span::longestSpan(){
     if (_vecArray.size() <= 1){
         throw NotEnoughNumbersForSpan();
     }
-    return (std::max_element() - std::min_element());
+    return (std::max_element(beginIterator, endIterator) - std::min_element(beginIterator, endIterator));
 }
 
 

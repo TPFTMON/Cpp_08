@@ -7,8 +7,8 @@
 
 
 // Classes:
-template <typename T> class MutantStack : public std::stack<T>{
-
+template <typename T> class MutantStack : public std::stack<T>{    // stack definition has a PROTECTED member c,
+                                                                   // therefore we use it here
     private:
     // ... some private stuff
 

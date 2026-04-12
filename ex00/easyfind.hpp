@@ -15,6 +15,6 @@ typename T::iterator easyfind(T& container, int to_find){
         throw std::runtime_error("to_find not found in container");
     }
     return (it);
-}                        // I don't use iterators to search manually. I use find.
+}                        // I don't use iterators to search manually. I use find. It does all the work.
 
 #endif
