@@ -2,9 +2,8 @@
 # define EASYFIND_HPP
 
 // Includes:
-# include <iostream>
 # include <algorithm>    // for std::find
-# include <exception> // ?
+// # include <exception>
 
 
 template <typename T>

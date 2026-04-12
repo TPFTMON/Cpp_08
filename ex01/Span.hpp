@@ -30,7 +30,7 @@ class Span{
 
     public:
         // Orthodox Canonical Form:
-        Span(const int lenght = 0);
+        Span(const size_t lenght = 0);
         Span(const Span &to_copy);
         Span& operator=(const Span assign);
         ~Span();
@@ -52,6 +52,11 @@ class Span{
 
 // exceptions:
 class NotEnoughNumbersForSpan  : public std::exception{
+    public:
+        virtual const char* what() const throw();
+};
+
+class OutOfBounds  : public std::exception{
     public:
         virtual const char* what() const throw();
 };

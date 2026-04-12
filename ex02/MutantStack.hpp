@@ -17,7 +17,7 @@ template <typename T> class MutantStack : public std::stack<T>{    // stack defi
     MutantStack() : stack() {};
     MutantStack(const MutantStack &to_copy) : stack(to_copy) {};
     MutantStack& operator=(const MutantStack assign) { stack::operator=(assign) };
-    ~MutantStack() : ~stack() {};
+    ~MutantStack() {};
 
     // Other member functions:
     typedef typename std::stack<T>::container_type::iterator iterator;
@@ -27,6 +27,8 @@ template <typename T> class MutantStack : public std::stack<T>{    // stack defi
     iterator end(){
         return this->c.end();
     }
+
+    // Also need const_iterator, reverse_iterator, and const_reverse_iterator
 
 };
 

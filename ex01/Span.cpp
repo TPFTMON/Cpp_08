@@ -4,7 +4,7 @@
 //                         ORTHODOX BASE
 // ================================================================
 
-Span::Span(const int lenght)
+Span::Span(const size_t lenght)
  : _maxSize(lenght){
 
 
@@ -39,6 +39,10 @@ Span::~Span(){
 
 void    Span::addNumber(const int num){
 
+    if (_vecArray.size() >= _maxSize){
+        throw OutOfBounds();
+    }
+
 }
 
 int     Span::shortestSpan(){
@@ -67,4 +71,9 @@ int     Span::longestSpan(){
 const char* NotEnoughNumbersForSpan::what() const throw(){
 
     return ("Not enough numbers to calculate Span");
+}
+
+const char* OutOfBounds::what() const throw(){
+
+    return ("Can't add number(s) to Span as it will overflow");
 }
