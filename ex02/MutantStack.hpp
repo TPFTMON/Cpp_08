@@ -3,32 +3,30 @@
 
 // Includes:
 # include <iostream>
-
-
-// Messages:
-# define MUTANTSTACK_MSG "\e[0;32mMutantStack\n\e[0m"
-
-# define DEF_CONSTR_MSG "\e[0;33mDefault Constructor\e[0m called of "
-# define COPY_CONSTR_MSG "\e[0;33mCopy Constructor\e[0m called of "
-# define COPY_ASSIGN_OP_MSG "\e[0;35mCopy assignment operator\e[0m called of "
-# define DESTR_MSG "\e[0;31mDestructor\e[0m called of "
+# include <stack>
 
 
 // Classes:
-class MutantStack{
+template <typename T> class MutantStack : public std::stack<T>{
 
     private:
-        // ... some private stuff
+    // ... some private stuff
 
     public:
-        // Orthodox Canonical Form:
-        MutantStack();
-        MutantStack(const MutantStack &to_copy);
-        MutantStack& operator=(const MutantStack &assign);
-        ~MutantStack();
+    // Orthodox Canonical Form:
+    MutantStack() : stack() {};
+    MutantStack(const MutantStack &to_copy) : stack(to_copy) {};
+    MutantStack& operator=(const MutantStack assign) { stack::operator=(assign) };
+    ~MutantStack() : ~stack() {};
 
-        // Other member functions:
-        // ... some members
+    // Other member functions:
+    typedef typename std::stack<T>::container_type::iterator iterator;
+    iterator begin(){
+        return this->c.begin();
+    }
+    iterator end(){
+        return this->c.end();
+    }
 
 };
 
