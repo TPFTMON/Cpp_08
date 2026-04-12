@@ -18,6 +18,7 @@
 # include <iostream>
 # include <vector>
 # include <exception>
+# include <algorithm>
 
 
 // Classes:

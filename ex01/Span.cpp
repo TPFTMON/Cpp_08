@@ -43,10 +43,18 @@ void    Span::addNumber(const int num){
 
 int     Span::shortestSpan(){
 
+    if (_vecArray.size() <= 1){
+        throw NotEnoughNumbersForSpan();
+    }
+
 }
 
 int     Span::longestSpan(){
 
+    if (_vecArray.size() <= 1){
+        throw NotEnoughNumbersForSpan();
+    }
+    return (std::max_element() - std::min_element());
 }
 
 
