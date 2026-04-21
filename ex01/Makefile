@@ -1,6 +1,6 @@
 NAME		= Span
 
-SRCS		=
+SRCS		= main.cpp Span.cpp
 
 OBJ_DIR		= obj
 

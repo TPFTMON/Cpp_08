@@ -7,8 +7,6 @@
 Span::Span(const size_t lenght)
  : _maxSize(lenght){
 
-
-
 }
 
 Span::Span(const Span &to_copy){
@@ -27,7 +25,6 @@ Span& Span::operator=(const Span assign){
 }
 
 Span::~Span(){
-
 
 }
 

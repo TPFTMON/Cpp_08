@@ -45,7 +45,6 @@ class Span{
             // 2. Checking if adding this distance exceeds _maxSize. If so, throw.
             // 3. Using _vec.insert(_vec.end(), begin, end);
         }
-        // void    addNumbers();
 
 };
 
