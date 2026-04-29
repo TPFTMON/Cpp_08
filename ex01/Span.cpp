@@ -19,14 +19,13 @@ Span::Span(const Span &to_copy){
 
 Span& Span::operator=(const Span other){ // still trying copy-and-swap idiom
 
-    std::vector<int> tempArray = this->_vecArray;
-    this->_vecArray = other._vecArray;
-    // other._vecArray = tempArray;
+    // 1. Swap the primitive types
+    std::swap(this->_maxSize, other._maxSize);
     
-    size_t tempMaxSize = this->_maxSize;
-    this->_maxSize = other._maxSize;
-    // other._maxSize = tempMaxSize;
-
+    // 2. Swap the vectors using the vector's built-in swap method
+    this->_vecArray.swap(other._vecArray);
+    
+    // 3. 'other' goes out of scope and automatically destroys your old data!
     return (*this);
 
 }
@@ -42,7 +41,7 @@ Span::~Span(){}
 void    Span::addNumber(const int num){
 
     if (_vecArray.size() >= _maxSize){
-        throw SpanException("Can't add number(s) to Span as it will overflow");
+        throw OutOfBoundsAddNumber("Can't add number(s) to Span as it will overflow");
     }
 
 }
@@ -50,10 +49,11 @@ void    Span::addNumber(const int num){
 int     Span::shortestSpan(){
 
     // 1. Sort the copy of array
-    // 2. Iterate through it comparing adjacent values until the end
+    // 2. Iterate through it comparing adjacent values until the end    
+    // (And yes, we save duplicates)
 
     if (_vecArray.size() <= 1){
-        throw SpanException("Not enough numbers to calculate Span");
+        throw NotEnoughNumbersForSpan("Not enough numbers to calculate Span");
     }
 
     std::vector<int> vecCopy = this->_vecArray;
@@ -69,7 +69,7 @@ int     Span::shortestSpan(){
 int     Span::longestSpan(){
 
     if (_vecArray.size() <= 1){
-        throw SpanException("Not enough numbers to calculate Span");
+        throw NotEnoughNumbersForSpan("Not enough numbers to calculate Span");
     }
 
     std::vector<int>::iterator beginIt = this->_vecArray.begin(), endIt =this->_vecArray.end(); 
@@ -78,7 +78,25 @@ int     Span::longestSpan(){
     return (res);
 }
 
+// ================================================================
+//                          SPAN EXCEPTIONS
+// ================================================================
 
+const char* NotEnoughNumbersForSpan::what() const throw(){
+
+    return ("Not enough numbers to calculate Span");
+}
+
+const char* OutOfBoundsAddNumber::what() const throw(){
+
+    return ("Can't add number(s) to Span as it will overflow");
+}
+
+
+const char* OutOfBoundsAddNumbers::what() const throw(){
+
+    return ("Amount of integers in addNumbers() exceeds capacity");
+}
 
 
 // int     Span::shortestSpan(){
@@ -99,16 +117,4 @@ int     Span::longestSpan(){
 // }
 
 
-// ================================================================
-//                          SPAN EXCEPTIONS
-// ================================================================
 
-// const char* NotEnoughNumbersForSpan::what() const throw(){
-
-//     return ("Not enough numbers to calculate Span");
-// }
-
-// const char* OutOfBounds::what() const throw(){
-
-//     return ("Can't add number(s) to Span as it will overflow");
-// }

@@ -50,34 +50,40 @@ class Span{
             // 3. Using _vecArray.insert(_vecArray.end(), begin, end);
 
             if (std::distance(begin, end) > std::distance(_vecArray.size(), _maxSize)){
-                throw SpanException("Amount of integers in addNumbers() exceeds capacity");
+                throw OutOfBoundsAddNumbers("Amount of integers in addNumbers() exceeds capacity");
             }
             _vecArray.insert(_vecArray.end(), begin, end);
         }
 
 };
 
-// Exception:
-class SpanException : public std::exception{
-
-    private:
-        const char* _msg;
-
+// Exceptions:
+class NotEnoughNumbersForSpan  : public std::exception{
     public:
-        SpanException(const char* msg) : _msg(msg) {}
-        virtual const char* what() const throw() { return (_msg); }
-
+        virtual const char* what() const throw();
 };
 
-// // exceptions:
-// class NotEnoughNumbersForSpan  : public std::exception{
-//     public:
-//         virtual const char* what() const throw();
-// };
+class OutOfBoundsAddNumber  : public std::exception{
+    public:
+        virtual const char* what() const throw();
+};
 
-// class OutOfBounds  : public std::exception{
+
+class OutOfBoundsAddNumbers  : public std::exception{
+    public:
+        virtual const char* what() const throw();
+};
+
+// // Exception:
+// class SpanException : public std::exception{
+
+//     private:
+//         const char* _msg;
+
 //     public:
-//         virtual const char* what() const throw();
+//         SpanException(const char* msg) : _msg(msg) {}
+//         virtual const char* what() const throw() { return (_msg); }
+
 // };
 
 #endif
