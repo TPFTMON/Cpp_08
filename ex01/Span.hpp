@@ -19,9 +19,12 @@
 # include <vector>
 # include <exception>
 # include <algorithm>
+# include <iterator> // for std::distance
 
 
 // Classes:
+class SpanException;
+
 class Span{
 
     private:
@@ -39,25 +42,42 @@ class Span{
         void    addNumber(const int num);
         int     shortestSpan();
         int     longestSpan();
-        template <typename InputIterator>
-        void addNumbers(InputIterator begin, InputIterator end){
+        template <typename InputIt>
+        void addNumbers(InputIt begin, InputIt end){
+
             // 1. Calculating distance using std::distance(begin, end)
             // 2. Checking if adding this distance exceeds _maxSize. If so, throw.
-            // 3. Using _vec.insert(_vec.end(), begin, end);
+            // 3. Using _vecArray.insert(_vecArray.end(), begin, end);
+
+            if (std::distance(begin, end) > std::distance(_vecArray.size(), _maxSize)){
+                throw SpanException("Amount of integers in addNumbers() exceeds capacity");
+            }
+            _vecArray.insert(_vecArray.end(), begin, end);
         }
 
 };
 
+// Exception:
+class SpanException : public std::exception{
 
-// exceptions:
-class NotEnoughNumbersForSpan  : public std::exception{
+    private:
+        const char* _msg;
+
     public:
-        virtual const char* what() const throw();
+        SpanException(const char* msg) : _msg(msg) {}
+        virtual const char* what() const throw() { return (_msg); }
+
 };
 
-class OutOfBounds  : public std::exception{
-    public:
-        virtual const char* what() const throw();
-};
+// // exceptions:
+// class NotEnoughNumbersForSpan  : public std::exception{
+//     public:
+//         virtual const char* what() const throw();
+// };
+
+// class OutOfBounds  : public std::exception{
+//     public:
+//         virtual const char* what() const throw();
+// };
 
 #endif
