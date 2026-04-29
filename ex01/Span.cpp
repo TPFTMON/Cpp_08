@@ -7,6 +7,8 @@
 Span::Span(const size_t lenght)
  : _maxSize(lenght){
 
+    // std::vector<int> vecArray(lenght);
+    // this->_vecArray = vecArray;
 }
 
 Span::Span(const Span &to_copy){
@@ -15,18 +17,21 @@ Span::Span(const Span &to_copy){
 
 }
 
-Span& Span::operator=(const Span assign){
+Span& Span::operator=(const Span other){ // still trying copy-and-swap idiom
 
-    if (this != &assign){
-        // ... assigning
-    }
+    std::vector<int> tempArray = this->_vecArray;
+    this->_vecArray = other._vecArray;
+    // other._vecArray = tempArray;
+    
+    size_t tempMaxSize = this->_maxSize;
+    this->_maxSize = other._maxSize;
+    // other._maxSize = tempMaxSize;
+
     return (*this);
 
 }
 
-Span::~Span(){
-
-}
+Span::~Span(){}
 
 
 
@@ -45,8 +50,7 @@ void    Span::addNumber(const int num){
 int     Span::shortestSpan(){
 
     // 1. Sort the copy of array
-    // 2. Iterate through it comparing adjacent values 
-    // until the end
+    // 2. Iterate through it comparing adjacent values until the end
 
     if (_vecArray.size() <= 1){
         throw SpanException("Not enough numbers to calculate Span");

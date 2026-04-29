@@ -35,7 +35,7 @@ class Span{
         // Orthodox Canonical Form:
         Span(const size_t lenght = 0);
         Span(const Span &to_copy);
-        Span& operator=(const Span assign);
+        Span& operator=(const Span other);
         ~Span();
 
         // Other member functions:
