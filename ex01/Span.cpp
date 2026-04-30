@@ -6,23 +6,12 @@
 
 Span::Span(const size_t lenght) : _maxSize(lenght){}
 
-Span::Span(const Span &to_copy){
+Span::Span(const Span &to_copy) : _vecArray(to_copy._vecArray), _maxSize(to_copy._maxSize) {}
 
-    // ... copying
+Span& Span::operator=(Span other){ // still trying copy-and-swap idiom
 
-}
-
-Span& Span::operator=(const Span other){ // still trying copy-and-swap idiom
-
-    // 1. Swap the primitive types
-    std::swap(this->_maxSize, other._maxSize);
-    
-    // 2. Swap the vectors using the vector's built-in swap method
-    this->_vecArray.swap(other._vecArray);
-    
-    // 3. 'other' goes out of scope and automatically destroys your old data!
+    this->swap(other);
     return (*this);
-
 }
 
 Span::~Span(){}
@@ -33,7 +22,7 @@ Span::~Span(){}
 //                OTHER SPAN MEMBER FUNCTIONS
 // ================================================================
 
-void    swap(Span &other){
+void    Span::swap(Span &other){
     std::swap(this->_maxSize, other._maxSize);
     this->_vecArray.swap(other._vecArray);
 }
@@ -43,13 +32,13 @@ void    Span::addNumber(const int num){
     if (_vecArray.size() >= _maxSize){
         throw OutOfBoundsAddNumber();
     }
-
+    _vecArray.push_back(num);
 }
 
 int     Span::shortestSpan(){
 
     // 1. Sort the copy of array
-    // 2. Iterate through it comparing adjacent values until the end    
+    // 2. Iterate through it comparing adjacent values until the end
     // (And yes, we save duplicates)
 
     if (_vecArray.size() <= 1){
@@ -58,7 +47,7 @@ int     Span::shortestSpan(){
 
     std::vector<int> vecCopy = this->_vecArray;
     sort(vecCopy.begin(), vecCopy.end());
-    
+
     int res = abs(vecCopy[0] - vecCopy[1]);
     // while()
 
@@ -72,9 +61,9 @@ int     Span::longestSpan(){
         throw NotEnoughNumbersForSpan();
     }
 
-    std::vector<int>::iterator beginIt = this->_vecArray.begin(), endIt =this->_vecArray.end(); 
+    std::vector<int>::iterator beginIt = this->_vecArray.begin(), endIt =this->_vecArray.end();
     int res = *std::max_element(beginIt, endIt) - *std::min_element(beginIt, endIt);
-    
+
     return (res);
 }
 

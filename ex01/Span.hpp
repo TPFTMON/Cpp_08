@@ -34,12 +34,12 @@ class Span{
     public:
         // Orthodox Canonical Form:
         Span(const size_t lenght = 0);
-        Span(Span &to_copy);           // Because I'm doing copy-and-swap idiom
-        Span& operator=(const Span other);
+        Span(const Span &to_copy);
+        Span& operator=(Span other);      // Because I'm doing copy-and-swap idiom
         ~Span();
 
         // Other member functions:
-        void swap(Span &other);
+        void    swap(Span &other);
         void    addNumber(const int num);
         int     shortestSpan();
         int     longestSpan();
@@ -51,7 +51,7 @@ class Span{
             // 2. Checking if adding this distance exceeds _maxSize. If so, throw.
             // 3. Using _vecArray.insert(_vecArray.end(), begin, end);
 
-            if (std::distance(begin, end) > std::distance(_vecArray.size(), _maxSize)){
+            if (std::distance(begin, end) > static_cast<long>(_maxSize - _vecArray.size())){
                 throw OutOfBoundsAddNumbers();
             }
             _vecArray.insert(_vecArray.end(), begin, end);
