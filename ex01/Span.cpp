@@ -23,6 +23,7 @@ Span::~Span(){}
 // ================================================================
 
 void    Span::swap(Span &other){
+    
     std::swap(this->_maxSize, other._maxSize);
     this->_vecArray.swap(other._vecArray);
 }
@@ -35,7 +36,7 @@ void    Span::addNumber(const int num){
     _vecArray.push_back(num);
 }
 
-int     Span::shortestSpan(){
+int     Span::shortestSpan(){ /////////////////////// !!!!!!
 
     // 1. Sort the copy of array
     // 2. Iterate through it comparing adjacent values until the end

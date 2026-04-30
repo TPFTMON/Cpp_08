@@ -40,6 +40,7 @@ class Span{
 
         // Other member functions:
         void    swap(Span &other);
+
         void    addNumber(const int num);
         int     shortestSpan();
         int     longestSpan();
@@ -56,8 +57,6 @@ class Span{
             }
             _vecArray.insert(_vecArray.end(), begin, end);
         }
-
-        // I think I should overload swap() myself (?)
 };
 
 // Exceptions:
@@ -70,7 +69,6 @@ class OutOfBoundsAddNumber  : public std::exception{
     public:
         virtual const char* what() const throw();
 };
-
 
 class OutOfBoundsAddNumbers  : public std::exception{
     public:
