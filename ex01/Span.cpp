@@ -4,12 +4,7 @@
 //                         ORTHODOX BASE
 // ================================================================
 
-Span::Span(const size_t lenght)
- : _maxSize(lenght){
-
-    // std::vector<int> vecArray(lenght);
-    // this->_vecArray = vecArray;
-}
+Span::Span(const size_t lenght) : _maxSize(lenght){}
 
 Span::Span(const Span &to_copy){
 
@@ -38,10 +33,15 @@ Span::~Span(){}
 //                OTHER SPAN MEMBER FUNCTIONS
 // ================================================================
 
+void    swap(Span &other){
+    std::swap(this->_maxSize, other._maxSize);
+    this->_vecArray.swap(other._vecArray);
+}
+
 void    Span::addNumber(const int num){
 
     if (_vecArray.size() >= _maxSize){
-        throw OutOfBoundsAddNumber("Can't add number(s) to Span as it will overflow");
+        throw OutOfBoundsAddNumber();
     }
 
 }
@@ -53,14 +53,14 @@ int     Span::shortestSpan(){
     // (And yes, we save duplicates)
 
     if (_vecArray.size() <= 1){
-        throw NotEnoughNumbersForSpan("Not enough numbers to calculate Span");
+        throw NotEnoughNumbersForSpan();
     }
 
     std::vector<int> vecCopy = this->_vecArray;
     sort(vecCopy.begin(), vecCopy.end());
     
-    int res;
-    // iterating loop 
+    int res = abs(vecCopy[0] - vecCopy[1]);
+    // while()
 
     return (res);
 }
@@ -69,7 +69,7 @@ int     Span::shortestSpan(){
 int     Span::longestSpan(){
 
     if (_vecArray.size() <= 1){
-        throw NotEnoughNumbersForSpan("Not enough numbers to calculate Span");
+        throw NotEnoughNumbersForSpan();
     }
 
     std::vector<int>::iterator beginIt = this->_vecArray.begin(), endIt =this->_vecArray.end(); 
@@ -97,24 +97,3 @@ const char* OutOfBoundsAddNumbers::what() const throw(){
 
     return ("Amount of integers in addNumbers() exceeds capacity");
 }
-
-
-// int     Span::shortestSpan(){
-
-//     // Sort the copy of array
-//     // Compare two first (different ?) numbers
-
-//     if (_vecArray.size() <= 1){
-//         throw SpanException("Not enough numbers to calculate Span");
-//     }
-
-//     std::vector<int> vecCopy = this->_vecArray;
-//     sort(vecCopy.begin(), vecCopy.end());
-    
-//     int res = vecCopy[1] - vecCopy[0];  // ??? I think I need to enhance logic
-//                                         // to check for DIFFERENT numbers
-//     return (res);
-// }
-
-
-

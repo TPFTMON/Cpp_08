@@ -23,7 +23,7 @@
 
 
 // Classes:
-class SpanException;
+class OutOfBoundsAddNumbers;
 
 class Span{
 
@@ -34,14 +34,16 @@ class Span{
     public:
         // Orthodox Canonical Form:
         Span(const size_t lenght = 0);
-        Span(const Span &to_copy);
+        Span(Span &to_copy);           // Because I'm doing copy-and-swap idiom
         Span& operator=(const Span other);
         ~Span();
 
         // Other member functions:
+        void swap(Span &other);
         void    addNumber(const int num);
         int     shortestSpan();
         int     longestSpan();
+
         template <typename InputIt>
         void addNumbers(InputIt begin, InputIt end){
 
@@ -50,11 +52,12 @@ class Span{
             // 3. Using _vecArray.insert(_vecArray.end(), begin, end);
 
             if (std::distance(begin, end) > std::distance(_vecArray.size(), _maxSize)){
-                throw OutOfBoundsAddNumbers("Amount of integers in addNumbers() exceeds capacity");
+                throw OutOfBoundsAddNumbers();
             }
             _vecArray.insert(_vecArray.end(), begin, end);
         }
 
+        // I think I should overload swap() myself (?)
 };
 
 // Exceptions:
@@ -73,17 +76,5 @@ class OutOfBoundsAddNumbers  : public std::exception{
     public:
         virtual const char* what() const throw();
 };
-
-// // Exception:
-// class SpanException : public std::exception{
-
-//     private:
-//         const char* _msg;
-
-//     public:
-//         SpanException(const char* msg) : _msg(msg) {}
-//         virtual const char* what() const throw() { return (_msg); }
-
-// };
 
 #endif

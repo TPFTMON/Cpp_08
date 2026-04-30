@@ -1,7 +1,7 @@
 #include "Span.hpp"
 
-int main()
-{
+int main(){
+
     // std::cout << "--- SUBJECT TEST ---\n";
     // Span sp = Span(5);
     // sp.addNumber(6); sp.addNumber(3); sp.addNumber(17);
@@ -26,7 +26,7 @@ int main()
     // std::cout << "Large Longest (should be 29998): " << largeSpan.longestSpan() << "\n";
 
     return (0);
-}
+};
 
 
 
