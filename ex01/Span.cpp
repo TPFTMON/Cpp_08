@@ -23,50 +23,83 @@ Span::~Span(){}
 // ================================================================
 
 void    Span::swap(Span &other){
-    
+
     std::swap(this->_maxSize, other._maxSize);
     this->_vecArray.swap(other._vecArray);
 }
 
 void    Span::addNumber(const int num){
 
-    if (_vecArray.size() >= _maxSize){
+    if (this->_vecArray.size() >= _maxSize){
         throw OutOfBoundsAddNumber();
     }
-    _vecArray.push_back(num);
+    this->_vecArray.push_back(num);
 }
 
-int     Span::shortestSpan(){ /////////////////////// !!!!!!
+int     Span::shortestSpan(){
 
     // 1. Sort the copy of array
     // 2. Iterate through it comparing adjacent values until the end
     // (And yes, we save duplicates)
 
-    if (_vecArray.size() <= 1){
+    if (this->_vecArray.size() < 2){
         throw NotEnoughNumbersForSpan();
     }
 
-    std::vector<int> vecCopy = this->_vecArray;
-    sort(vecCopy.begin(), vecCopy.end());
+    std::vector<int> tmp = this->_vecArray;
+    std::vector<int>::iterator beginIt = tmp.begin();
+    std::vector<int>::iterator endIt = tmp.end();
 
-    int res = abs(vecCopy[0] - vecCopy[1]);
-    // while()
+    sort(beginIt, endIt);
 
-    return (res);
+    int min_dif = -1; // (cannot be by default)
+    for (std::vector<int>::iterator it = beginIt; it != endIt - 1; ++it){
+
+        long dif = static_cast<long>(*(it + 1)) - static_cast<long>(*it);
+
+        if (min_dif == -1 || dif < min_dif)
+            min_dif = dif;
+
+        if (min_dif == 0) { break ; }
+    }
+
+
+    return (min_dif);
 }
 
 
 int     Span::longestSpan(){
 
-    if (_vecArray.size() <= 1){
+    if (this->_vecArray.size() < 2){
         throw NotEnoughNumbersForSpan();
     }
 
-    std::vector<int>::iterator beginIt = this->_vecArray.begin(), endIt =this->_vecArray.end();
-    int res = *std::max_element(beginIt, endIt) - *std::min_element(beginIt, endIt);
+    std::vector<int>::iterator beginIt = this->_vecArray.begin();
+    std::vector<int>::iterator endIt = this->_vecArray.end();
 
-    return (res);
+    int max_v = *std::max_element(beginIt, endIt);
+    int min_v = *std::min_element(beginIt, endIt);
+
+    // long here is very important because of the potential difference in 4 million
+    long max_dif = static_cast<long>(max_v) - static_cast<long>(min_v);
+
+    return (max_dif);
 }
+
+// int     Span::longestSpan(){
+
+//     if (_vecArray.size() <= 1){
+//         throw NotEnoughNumbersForSpan();
+//     }
+
+//     std::vector<int>::iterator beginIt = this->_vecArray.begin();
+//     std::vector<int>::iterator endIt =this->_vecArray.end();
+
+//     // long here is very important because of the potential difference in 4 million
+//     long res = *std::max_element(beginIt, endIt) - *std::min_element(beginIt, endIt);
+
+//     return (res);
+// }
 
 // ================================================================
 //                          SPAN EXCEPTIONS

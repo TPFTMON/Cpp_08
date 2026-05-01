@@ -20,6 +20,7 @@
 # include <exception>
 # include <algorithm>
 # include <iterator> // for std::distance
+# include <climits>
 
 
 // Classes:

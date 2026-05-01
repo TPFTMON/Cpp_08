@@ -17,13 +17,21 @@ int main(){
 
     // 3. The 10,000+ Test with range iterators
     std::cout << "\n--- LARGE RANGE TEST ---\n";
-    Span largeSpan(15000);
+    Span largeSpan(15003);
     std::vector<int> bulk;
     for (int i = 0; i < 15000; i++) bulk.push_back(i * 2);
+    bulk.push_back(/*-2147483648*/ INT_MIN);
+    // bulk.push_back(-2147483647);
+    bulk.push_back(INT_MAX);
+    bulk.push_back(2147483647);
+
+    // bulk.push_back(-10);
+    // bulk.push_back(10);
+    // bulk.push_back(10);
 
     largeSpan.addNumbers(bulk.begin(), bulk.end());
-    std::cout << "Large Shortest (should be 2): " << largeSpan.shortestSpan() << "\n";
-    std::cout << "Large Longest (should be 29998): " << largeSpan.longestSpan() << "\n";
+    std::cout << "Large Shortest (should be 0): " << largeSpan.shortestSpan() << "\n";
+    std::cout << "Large Longest (should be 4 294 967 295): " << largeSpan.longestSpan() << "\n";
 
     return (0);
 };
