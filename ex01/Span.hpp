@@ -43,8 +43,8 @@ class Span{
         void    swap(Span &other);
 
         void    addNumber(const int num);
-        int     shortestSpan();
-        int     longestSpan();
+        long    shortestSpan();
+        long    longestSpan();
 
         template <typename InputIt>
         void addNumbers(InputIt begin, InputIt end){

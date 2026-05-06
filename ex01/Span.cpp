@@ -36,7 +36,7 @@ void    Span::addNumber(const int num){
     this->_vecArray.push_back(num);
 }
 
-int     Span::shortestSpan(){
+long     Span::shortestSpan(){
 
     // 1. Sort the copy of array
     // 2. Iterate through it comparing adjacent values until the end
@@ -68,7 +68,7 @@ int     Span::shortestSpan(){
 }
 
 
-int     Span::longestSpan(){
+long     Span::longestSpan(){
 
     if (this->_vecArray.size() < 2){
         throw NotEnoughNumbersForSpan();
@@ -83,6 +83,7 @@ int     Span::longestSpan(){
     // long here is very important because of the potential difference in 4 million
     long max_dif = static_cast<long>(max_v) - static_cast<long>(min_v);
 
+    // std::cout << max_dif;
     return (max_dif);
 }
 
