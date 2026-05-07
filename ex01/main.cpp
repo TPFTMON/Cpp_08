@@ -12,8 +12,8 @@ int main(){
     std::cout << "--- EXCEPTION TESTS ---\n";
     Span small(1);
     small.addNumber(42);
-    try { small.shortestSpan(); } catch(std::exception &e) { std::cerr << e.what() << "\n"; }
-    try { sp.addNumber(99); } catch(std::exception &e) { std::cerr << "Capacity error: " << e.what() << "\n"; }
+    try { small.shortestSpan(); } catch(std::exception &e) { std::cerr << "Error caught: " << e.what() << "\n"; }
+    try { sp.addNumber(99); } catch(std::exception &e) { std::cerr << "Error caught: " << e.what() << "\n"; }
 
     // 3. The 10,000+ Test with range iterators
     std::cout << "\n--- LARGE RANGE TEST ---\n";
@@ -23,7 +23,7 @@ int main(){
     // bulk.push_back(/*-2147483648*/ INT_MIN);
     bulk.push_back(-2147483648);
     // bulk.push_back(-1);
-    bulk.push_back(2147483647);
+    bulk.push_back(INT_MAX);
     bulk.push_back(2147483647);
 
     // bulk.push_back(-10);

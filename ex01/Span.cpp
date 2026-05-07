@@ -52,7 +52,7 @@ long     Span::shortestSpan(){
 
     sort(beginIt, endIt);
 
-    int min_dif = -1; // (cannot be by default)
+    long min_dif = -1; // (cannot be by default)
     for (std::vector<int>::iterator it = beginIt; it != endIt - 1; ++it){
 
         long dif = static_cast<long>(*(it + 1)) - static_cast<long>(*it);
