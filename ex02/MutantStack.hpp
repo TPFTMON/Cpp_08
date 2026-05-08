@@ -7,7 +7,8 @@
 
 
 // Classes:
-template <typename T> class MutantStack : public std::stack<T>{    // stack definition has a PROTECTED member c,
+template <typename T>
+class MutantStack : public std::stack<T>{    // stack definition has a PROTECTED member c,
                                                                    // therefore we use it here
     private:
     // ... some private stuff
@@ -21,12 +22,8 @@ template <typename T> class MutantStack : public std::stack<T>{    // stack defi
 
     // Other member functions:
     typedef typename std::stack<T>::container_type::iterator iterator;
-    iterator begin(){
-        return this->c.begin();
-    }
-    iterator end(){
-        return this->c.end();
-    }
+    iterator begin() { return (this->c.begin()); }
+    iterator end() { return (this->c.end()); }
 
     // Also need const_iterator, reverse_iterator, and const_reverse_iterator
 
