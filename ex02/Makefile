@@ -1,6 +1,6 @@
 NAME		= MutantStack
 
-SRCS		=
+SRCS		= main.cpp
 
 OBJ_DIR		= obj
 
