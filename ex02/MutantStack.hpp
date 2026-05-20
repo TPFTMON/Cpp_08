@@ -23,7 +23,7 @@ class MutantStack : public std::stack<T>{    // stack definition has a PROTECTED
         std::stack<T>::swap(other);
     }
 
-    MutantStack<T>& operator=(const MutantStack other){
+    MutantStack<T>& operator=(MutantStack other){
         swap(other);
 
         return (*this);
@@ -46,12 +46,12 @@ class MutantStack : public std::stack<T>{    // stack definition has a PROTECTED
     const_iterator end() const { return this->c.end(); }
 
 
-    reverse_iterator rbegin() { return this->c.rend(); }
-    reverse_iterator rend() { return this->c.rbegin(); }
+    reverse_iterator rbegin() { return this->c.rbegin(); }
+    reverse_iterator rend() { return this->c.rend(); }
 
 
-    const_reverse_iterator rbegin() const { return this->c.rend(); }
-    const_reverse_iterator rend() const { return this->c.rbegin(); }
+    const_reverse_iterator rbegin() const { return this->c.rbegin(); }
+    const_reverse_iterator rend() const { return this->c.rend(); }
 };
 
 #endif
