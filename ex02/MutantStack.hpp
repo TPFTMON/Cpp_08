@@ -2,7 +2,7 @@
 # define MUTANTSTACK_HPP
 
 // Includes:
-# include <iostream>
+// # include <iostream>
 # include <stack>
 
 
@@ -14,34 +14,44 @@ class MutantStack : public std::stack<T>{    // stack definition has a PROTECTED
     // ... some private stuff
 
     public:
+
     // Orthodox Canonical Form:
-    MutantStack() : stack() {};
-    MutantStack(const MutantStack &to_copy) : stack(to_copy) {};
-    MutantStack& operator=(const MutantStack assign) { stack::operator=(assign) };
+    MutantStack() : std::stack<T>() {};
+    MutantStack(const MutantStack<T> &other) : std::stack<T>(other) {};
+
+    void swap(MutantStack<T>& other){
+        std::stack<T>::swap(other);
+    }
+
+    MutantStack<T>& operator=(const MutantStack other){
+        swap(other);
+
+        return (*this);
+    };
+
     ~MutantStack() {};
 
-    // Other member functions:
-    typedef typename std::stack<T>::container_type::iterator iterator;
-    iterator begin() { return (this->c.begin()); }
-    iterator end() { return (this->c.end()); }
+    // Iterators:
+    typedef typename std::stack<T>::container_type::iterator               iterator;
+    typedef typename std::stack<T>::container_type::const_iterator         const_iterator;
+    typedef typename std::stack<T>::container_type::reverse_iterator       reverse_iterator;
+    typedef typename std::stack<T>::container_type::const_reverse_iterator const_reverse_iterator;
 
-    // Also need const_iterator, reverse_iterator, and const_reverse_iterator
 
-    typedef typename std::stack<T>::container_type::const_iterator const_iterator;
-    const_iterator begin() { return (const this->c.begin()); }
-    const_iterator end() { return (const this->c.end()); }
+    iterator begin() { return this->c.begin(); }
+    iterator end() { return this->c.end(); }
 
-    typedef typename std::stack<T>::container_type::reverse_iterator reverse_iterator;
-    reverse_iterator begin() { return (this->c.end()); }
-    reverse_iterator end() { return (this->c.begin()); }
 
-    typedef typename std::stack<T>::container_type::reverse_const_iterator reverse_const_iterator;
-    reverse_const_iterator begin() { return (const this->c.end()); }
-    reverse_const_iterator end() { return (const this->c.begin()); }
+    const_iterator begin() const { return this->c.begin(); }
+    const_iterator end() const { return this->c.end(); }
+
+
+    reverse_iterator rbegin() { return this->c.rend(); }
+    reverse_iterator rend() { return this->c.rbegin(); }
+
+
+    const_reverse_iterator rbegin() const { return this->c.rend(); }
+    const_reverse_iterator rend() const { return this->c.rbegin(); }
 };
-
-
-// Other:
-// ...
 
 #endif
