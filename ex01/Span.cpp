@@ -87,21 +87,6 @@ long     Span::longestSpan(){
     return (max_dif);
 }
 
-// int     Span::longestSpan(){
-
-//     if (_vecArray.size() <= 1){
-//         throw NotEnoughNumbersForSpan();
-//     }
-
-//     std::vector<int>::iterator beginIt = this->_vecArray.begin();
-//     std::vector<int>::iterator endIt =this->_vecArray.end();
-
-//     // long here is very important because of the potential difference in 4 million
-//     long res = *std::max_element(beginIt, endIt) - *std::min_element(beginIt, endIt);
-
-//     return (res);
-// }
-
 // ================================================================
 //                          SPAN EXCEPTIONS
 // ================================================================
