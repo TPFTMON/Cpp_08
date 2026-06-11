@@ -26,7 +26,7 @@ int main(){
 
     try{
         std::cout << "Finding 42 in list: " << *easyfind(lst, 42) << "\n";
-        std::cout << "Finding 50 in list: " << *easyfind(vec, 50) << "\n";
+        std::cout << "Finding 50 in vector: " << *easyfind(vec, 50) << "\n";
     }
     catch (std::exception& e){
         std::cerr << "Error caught: " << e.what() << "\n";
